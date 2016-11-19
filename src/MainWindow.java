@@ -46,8 +46,18 @@ public class MainWindow {
 		createButton("1", CalcEngine.Commands.ONE, 0, 0, buttonpanel);
 		createButton("2", CalcEngine.Commands.TWO, 1, 0, buttonpanel);
 		createButton("3", CalcEngine.Commands.THREE, 2, 0, buttonpanel);
-		createButton("+", CalcEngine.Commands.PLUS, 3, 0, buttonpanel);
-		createButton("=", CalcEngine.Commands.EQUAL, 3, 1, buttonpanel);
+		createButton("4", CalcEngine.Commands.FOUR, 0, 1, buttonpanel);
+		createButton("5", CalcEngine.Commands.FIVE, 1, 1, buttonpanel);
+		createButton("6", CalcEngine.Commands.SIX, 2, 1, buttonpanel);
+		createButton("7", CalcEngine.Commands.SEVEN, 0, 2, buttonpanel);
+		createButton("8", CalcEngine.Commands.EIGHT, 1, 2, buttonpanel);
+		createButton("9", CalcEngine.Commands.NINE, 2, 2, buttonpanel);
+		createButton("0", CalcEngine.Commands.ZERO, 0, 3, buttonpanel);
+		createButton("+", CalcEngine.Commands.ADD, 3, 0, buttonpanel);
+		createButton("-", CalcEngine.Commands.SUBTRACT, 3, 1, buttonpanel);
+		createButton("*", CalcEngine.Commands.MULTIPLY, 3, 2, buttonpanel);
+		createButton("/", CalcEngine.Commands.DIVIDE, 3, 3, buttonpanel);
+		createButton("=", CalcEngine.Commands.EQUAL, 3, 4, buttonpanel);
 
 		frame.pack();
 		frame.setVisible(true);

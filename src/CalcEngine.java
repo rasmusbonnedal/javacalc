@@ -10,7 +10,17 @@ public class CalcEngine
 		ONE,
 		TWO,
 		THREE,
-		PLUS,
+		FOUR,
+		FIVE,
+		SIX,
+		SEVEN,
+		EIGHT,
+		NINE,
+		ZERO,
+		ADD,
+		SUBTRACT,
+		MULTIPLY,
+		DIVIDE,
 		EQUAL,
 		NONE
 	}
@@ -41,7 +51,47 @@ public class CalcEngine
 				_currentValue = _currentValue * 10 + 3;
 				_hasCurrentValue = true;
 				break;
-			case PLUS :
+			case FOUR :
+				_currentValue = _currentValue * 10 + 4;
+				_hasCurrentValue = true;
+				break;
+			case FIVE :
+				_currentValue = _currentValue * 10 + 5;
+				_hasCurrentValue = true;
+				break;
+			case SIX :
+				_currentValue = _currentValue * 10 + 6;
+				_hasCurrentValue = true;
+				break;
+			case SEVEN :
+				_currentValue = _currentValue * 10 + 7;
+				_hasCurrentValue = true;
+				break;
+			case EIGHT :
+				_currentValue = _currentValue * 10 + 8;
+				_hasCurrentValue = true;
+				break;
+			case NINE :
+				_currentValue = _currentValue * 10 + 9;
+				_hasCurrentValue = true;
+				break;
+			case ZERO :
+				_currentValue = _currentValue * 10;
+				_hasCurrentValue = true;
+				break;
+			case ADD :
+				doOperation();
+				_nextOperation = command;
+				break;
+			case SUBTRACT :
+				doOperation();
+				_nextOperation = command;
+				break;
+			case MULTIPLY :
+				doOperation();
+				_nextOperation = command;
+				break;
+			case DIVIDE :
 				doOperation();
 				_nextOperation = command;
 				break;
@@ -55,8 +105,17 @@ public class CalcEngine
 	private void doOperation() {
 		if (_hasCurrentValue) {
 			switch(_nextOperation) {
-				case PLUS :
+				case ADD :
 					_currentValue += _storedValue;
+					break;
+				case SUBTRACT :
+					_currentValue = _storedValue - _currentValue;
+					break;
+				case MULTIPLY :
+					_currentValue = _storedValue * _currentValue;
+					break;
+				case DIVIDE :
+					_currentValue = _storedValue / _currentValue;
 					break;
 			}
 			_storedValue = _currentValue;
