@@ -7,22 +7,41 @@
 public class CalcEngine
 {
 	public enum Commands {
-		ONE,
-		TWO,
-		THREE,
-		FOUR,
-		FIVE,
-		SIX,
-		SEVEN,
-		EIGHT,
-		NINE,
-		ZERO,
+		ONE(1),
+		TWO(2),
+		THREE(3),
+		FOUR(4),
+		FIVE(5),
+		SIX(6),
+		SEVEN(7),
+		EIGHT(8),
+		NINE(9),
+		ZERO(0),
 		ADD,
 		SUBTRACT,
 		MULTIPLY,
 		DIVIDE,
 		EQUAL,
-		NONE
+		NONE;
+
+		// Value is the digit of the command, -1 for operations.
+		private int _value;
+
+		private Commands() {
+			_value = -1;
+		}
+
+		private Commands(int value) {
+			_value = value;
+		}
+
+		public boolean isValue() {
+			return _value != -1;
+		}
+
+		public int getValue() {
+			return _value;
+		}
 	}
 
 	private int _currentValue;
@@ -38,67 +57,12 @@ public class CalcEngine
 	}
 
 	public void sendCommand(Commands command) {
-		switch(command) {
-			case ONE :
-				_currentValue = _currentValue * 10 + 1;
-				_hasCurrentValue = true;
-				break;
-			case TWO :
-				_currentValue = _currentValue * 10 + 2;
-				_hasCurrentValue = true;
-				break;
-			case THREE :
-				_currentValue = _currentValue * 10 + 3;
-				_hasCurrentValue = true;
-				break;
-			case FOUR :
-				_currentValue = _currentValue * 10 + 4;
-				_hasCurrentValue = true;
-				break;
-			case FIVE :
-				_currentValue = _currentValue * 10 + 5;
-				_hasCurrentValue = true;
-				break;
-			case SIX :
-				_currentValue = _currentValue * 10 + 6;
-				_hasCurrentValue = true;
-				break;
-			case SEVEN :
-				_currentValue = _currentValue * 10 + 7;
-				_hasCurrentValue = true;
-				break;
-			case EIGHT :
-				_currentValue = _currentValue * 10 + 8;
-				_hasCurrentValue = true;
-				break;
-			case NINE :
-				_currentValue = _currentValue * 10 + 9;
-				_hasCurrentValue = true;
-				break;
-			case ZERO :
-				_currentValue = _currentValue * 10;
-				_hasCurrentValue = true;
-				break;
-			case ADD :
-				doOperation();
-				_nextOperation = command;
-				break;
-			case SUBTRACT :
-				doOperation();
-				_nextOperation = command;
-				break;
-			case MULTIPLY :
-				doOperation();
-				_nextOperation = command;
-				break;
-			case DIVIDE :
-				doOperation();
-				_nextOperation = command;
-				break;
-			case EQUAL :
-				doOperation();
-				_nextOperation = command;
-				break;
+		if (command.isValue()) {
+			_currentValue = _currentValue * 10 + command.getValue();
+			_hasCurrentValue = true;
+		} else {
+			doOperation();
+			_nextOperation = command;
 		}
 	}
 
