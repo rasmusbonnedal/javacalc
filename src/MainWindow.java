@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 public class MainWindow {
 	private JLabel _textField;
 	private CalcEngine _calcEngine;
+	private Boolean _interfaceEnabled;
 
 	public MainWindow(CalcEngine calcEngine) {
 		_calcEngine = calcEngine;
@@ -30,6 +31,13 @@ public class MainWindow {
 		});
 	}
 
+	private static void enableButtons(Boolean b, JPanel panel) {
+		Component [] component = panel.getComponents();
+		for (int i=0; i<component.length; i++) {
+			component[i].setEnabled(b);
+		}
+	}
+
 	public void buildGUI() {
 		JFrame frame = new JFrame("JavaCalc");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -37,9 +45,13 @@ public class MainWindow {
 		JPanel mainpanel = new JPanel(new BorderLayout());
 		frame.add(mainpanel);
 
+		_interfaceEnabled = false;
+		JButton onOffButton = new JButton("OFF");
+		mainpanel.add(onOffButton, BorderLayout.NORTH);
+
 		// TODO: Text field should be right aligned.
 		_textField = new JLabel(_calcEngine.getResult());
-		mainpanel.add(_textField, BorderLayout.NORTH);
+		mainpanel.add(_textField, BorderLayout.CENTER);
 		JPanel buttonpanel = new JPanel(new GridBagLayout());
 		mainpanel.add(buttonpanel, BorderLayout.SOUTH);
 
@@ -58,6 +70,17 @@ public class MainWindow {
 		createButton("*", CalcEngine.Commands.MULTIPLY, 3, 2, buttonpanel);
 		createButton("/", CalcEngine.Commands.DIVIDE, 3, 3, buttonpanel);
 		createButton("=", CalcEngine.Commands.EQUAL, 3, 4, buttonpanel);
+
+		enableButtons(false, buttonpanel);
+
+		onOffButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				_interfaceEnabled = !_interfaceEnabled;
+				onOffButton.setText(_interfaceEnabled ? "ON" : "OFF");
+				enableButtons(_interfaceEnabled, buttonpanel);
+				buttonpanel.repaint();
+			}
+		});
 
 		frame.pack();
 		frame.setVisible(true);
